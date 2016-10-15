@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      lang="pt-br">
+    <h:head>
+        <h:outputStylesheet library="css" name="sistema.css" />  
+        <title>Cadastro de Contrato de Treinamentos</title>
+    </h:head>        
+    <h:body>
+        <h:form id="frm">
+            <p:tabView >
+                <p:tab title="Dados principais">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Razão social" for="razaoSocial"/>
+                        <p:inputText id="razaoSocial" size="35" required="true"/>
+
+                        <p:outputLabel value="CNPJ" for="cnpj" />           
+                        <p:inputMask mask="99.999.999/9999-99" id="cnpj" size="18" required="true" />
+
+                        <p:outputLabel value="Cidade do contrato" for="cidadeContrato" />
+                        <p:inputText id="cidadeContrato" size="25" required="true"/>
+
+                        <p:outputLabel value="Modalidade" for="modalidade" />   
+                        <p:selectOneRadio id="modalidade" styleClass="sem-borda" required="true">
+                            <f:selectItem itemLabel="EAD" />
+                            <f:selectItem itemLabel="Presencial" />
+                        </p:selectOneRadio>
+                    </h:panelGrid>
+                </p:tab>                
+                <p:tab title="Contrato">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Data do contrato" for="dataContrato"/>
+                        <p:calendar id="dataContrato" size="20" required="true"/>
+
+                        <p:outputLabel value="Valor contrato" for="valorContrato"/>
+                        <p:inputText id="valorContrato" size="20" required="true"/>
+
+                        <p:outputLabel value="Método de pagamento" for="metodoPagamento"/>
+                        <p:selectOneMenu id="metodoPagamento" required="true">
+                            <f:selectItem itemLabel="Selecione"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Razão social" for="razaoSocial"/>
+                        <p:inputText id="razaoSocial" size="35" required="true"/>
+                    </p:panelGrid>
+                </p:tab>             
+                <p:tab title="Cursos">
+                    <p:selectManyCheckbox layout="pageDirection" required="true">
+                        <f:selectItem itemLabel="Fundamentos Java e OO" itemValue="Fundamentos Java e OO" />
+                        <f:selectItem itemLabel="Desenvolvimento web com JSF2" itemValue="Desenvolvimento web com JSF2"/>
+                        <f:selectItem itemLabel="Persistencia de Dados com JPA 2 e Hibernate" itemValue="Persistencia de Dados com JPA 2 e Hibernate"/>
+                        <f:selectItem itemLabel="Gerenciamento Ágil de Projetos com Scrum" itemValue="Gerenciamento Ágil de Projetos com Scrum"/>
+                    </p:selectManyCheckbox>
+                </p:tab>
+            </p:tabView>  
+            <p/>
+            <p:commandButton value="Cadastrar" style="margin-left: 20px"/>
+            <p/><p/>
+            
+            <p:dataTable >
+                <p:column headerText="Razão Social" >
+                    <h:outputText />
+                </p:column>
+                <p:column headerText="CNPJ" >
+                    <h:outputText />
+                </p:column>
+                <p:column headerText="Data do contrato" >
+                    <h:outputText />
+                </p:column>
+                <p:column headerText="Cursos" >
+                    
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
