@@ -3,9 +3,11 @@ package br.blog.weyder.pedidovenda.controller;
 import br.blog.weyder.pedidovenda.model.Categoria;
 import br.blog.weyder.pedidovenda.model.Produto;
 import br.blog.weyder.pedidovenda.repository.Categorias;
+import br.blog.weyder.pedidovenda.service.CadastroProdutoService;
 import br.blog.weyder.pedidovenda.util.jsf.FacesUtil;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -21,6 +23,9 @@ public class CadastroProdutoBean implements Serializable {
 
     @Inject
     private Categorias categorias;
+    
+    @Inject
+    private CadastroProdutoService cadastroProdutoService; 
 
     private Produto produto;
     private Categoria categoriaPai;
@@ -29,7 +34,8 @@ public class CadastroProdutoBean implements Serializable {
     private List<Categoria> subcategorias;
 
     public CadastroProdutoBean() {
-        produto = new Produto();
+        //produto = new Produto();
+        limpar();
     }
 
     public void inicializar() {
@@ -42,9 +48,17 @@ public class CadastroProdutoBean implements Serializable {
         subcategorias = categorias.subcategoriasDe(categoriaPai);
     }
     
+    private void limpar() {
+        produto = new Produto();
+        categoriaPai = null;
+        subcategorias = new ArrayList<>();
+    }
+    
     public void salvar() {
-        System.out.println("Categoria pai selecionada " + categoriaPai.getDescricao());
-        System.out.println("Subcategoria selecionada " + produto.getCategoria().getDescricao());
+       this.produto = cadastroProdutoService.salvar(this.produto);
+       limpar();
+       
+       FacesUtil.addInfoMessage("Produto salvo com sucesso.");
     }
 
     public Produto getProduto() {
