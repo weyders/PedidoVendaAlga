@@ -24,7 +24,12 @@ public class Categorias implements Serializable{
             
     public List<Categoria> raizes() {
         // Nome da classe, entidade por isso é maiuscula
-        return manager.createQuery("from Categoria", Categoria.class).getResultList(); 
+        return manager.createQuery("from Categoria where categoriaPai is null",
+                Categoria.class).getResultList(); 
     }
     
+    public List<Categoria> subcategoriasDe(Categoria categoriaPai) {
+        return manager.createQuery("from Categoria where categoriaPai = :raiz",
+                Categoria.class).setParameter("raiz", categoriaPai).getResultList();
+    }
 }
