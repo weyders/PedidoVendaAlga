@@ -2,6 +2,7 @@ package br.blog.weyder.pedidovenda.service;
 
 import br.blog.weyder.pedidovenda.model.Produto;
 import br.blog.weyder.pedidovenda.repository.Produtos;
+import br.blog.weyder.pedidovenda.util.jpa.Transactional;
 
 import java.io.Serializable;
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ public class CadastroProdutoService implements Serializable{
        @Inject
        private Produtos produtos;
        
+       @Transactional
        public Produto salvar(Produto produto) {
            // Regra de negocio onde nao pode ter 2 SKU
            Produto produtoExistente = produtos.porSku(produto.getSku());
